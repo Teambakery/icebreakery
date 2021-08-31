@@ -1,0 +1,198 @@
+<!-- 👋 Hello -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@900&family=Kavoon&family=Nunito:wght@900&family=Oleo+Script+Swash+Caps:wght@700&family=Paytone+One&family=Work+Sans:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-yellow-500">
+  <!-- Hero -->
+  <div class="sm:flex h-screen">
+    <div class="sm:m-auto">
+      <div class="max-w-5xl text-center pt-8 pb-4 px-4 sm:py-20 sm:px-6 lg:px-8">
+        <p class="mb-4 text-lg leading-6 text-yellow-200">Demandez à vos collègues</p>
+        <h2 class="text-4xl font-extrabold text-white sm:text-7xl mb-8">
+          <span id="icebreaker" class="block" style="font-family: 'Nunito', sans-serif;"></span>
+        </h2>
+        <button onClick="window.location.href=window.location.href" type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+          <i class="fas fa-redo-alt"/></i>
+        </button>
+        <div class="rounded-md bg-yellow-400 p-4 mt-12 sm:mt-24 max-w-2xl mx-auto text-sm">
+          <div class="flex">
+            <div class="flex-shrink-0 mt-3">
+              <i class="fas fa-lightbulb fa-lg text-yellow-700"></i>
+            </div>
+            <div class="ml-3">
+              <div class="mt-2 text-sm text-yellow-700 text-left">
+                <p>
+                  Bookmarkez cette page pour toujours avoir un icebreaker à partager en début de journée, en réunion ou à la pause déjeuner.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Newsletter -->
+    <div class="sm:absolute sm:bottom-0 sm:left-0">
+      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 lg:flex lg:items-center">
+        <div class="lg:flex-1">
+          <h2 class="text-lg font-extrabold sm:text-2xl text-yellow-700">
+            Offert part <a href="https://teambakery.com" class="hover:underline">Teambakery</a>
+          </h2>
+          <p class="mt-3 max-w-3xl text-md text-white">
+            Envie de conseils pratiques pour animer votre équipe ? <i class="fas fa-arrow-right ml-2"></i>
+          </p>
+        </div>
+        <div id="mc_embed_signup" class="mt-8 lg:mt-0 lg:ml-8">
+          <form action="https://teambakery.us5.list-manage.com/subscribe/post?u=5f58ef8f40e9c83c27e4d84b2&amp;id=73eecf6954" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="sm:flex" target="_blank" novalidate>
+            <label for="email-address" class="sr-only">Email address</label>
+            <input id="mce-EMAIL" name="EMAIL" type="email" autocomplete="email" required class="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500 sm:max-w-xs rounded-md" placeholder="Email pro">
+            <div id="mce-responses" class="clear">
+              <div class="response" id="mce-error-response" style="display:none"></div>
+              <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5f58ef8f40e9c83c27e4d84b2_73eecf6954" tabindex="-1" value=""></div>
+            <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+              <input type="submit" value="Recevoir gratuitement" name="subscribe" id="mc-embedded-subscribe" class="w-full flex items-center justify-center py-3 px-5 border border-transparent text-base font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 cursor-pointer">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Made by -->
+    <div class="sm:absolute sm:bottom-0 sm:right-0 p-8 text-yellow-700 text-right">
+      Cuisiné par <a href="https://twitter.com/sowenjub" class="hover:underline font-bold">Arnaud</a> et <a href="https://twitter.com/ba_b" class="hover:underline font-bold">Baptiste</a>,
+      <br/><a href="https://teambakery.com" class="hover:underline font-bold">teambakery.com</a>
+    </div>
+  </div>
+</body>
+  <script type="text/javascript">
+    let icebreakers = [
+      "De quel événement de votre année de naissance vous sentez-vous proche ?",
+      "Quelle anecdote avez-vous à raconter sur vos ancêtres ?",
+      "Quel est le plat le plus compliqué que vous savez cuisiner sans regarder la recette ?",
+      "Sur quel jeu vidéo avez-vous passé le plus de temps dernièrement ?",
+      "Quelle est l'histoire derrière le nom de votre enfant ou de votre animal de compagnie ?",
+      "Quelle est la durée de votre plus long séjour à l'étranger ?",
+      "Si vous deviez remercier quelqu'un pour vous avoir aidé à devenir la personne que vous êtes, qui ce serait et qu'est-ce qu'il a fait pour vous ?",
+      "Qui est votre gaucher préféré ?",
+      "Quel aliment aimez-vous que les autres trouvent habituellement dégoûtant ?",
+      "Quels plats vous rappellent votre enfance ?",
+      "À quoi devez-vous votre plus belle (ou ridicule) cicatrice ?",
+      "Quel est le meilleur cadeau que vous ayez jamais reçu ?",
+      "Quelle phobie ou quelle peur avez-vous réussi à surmonter ?",
+      "Quelles étaient vos séries télévisées préférées en grandissant ?",
+      "Quel film vous a fait le plus peur ?",
+      "Savez-vous jouer d'un ou plusieurs instruments de musique ?",
+      "Avez-vous déjà rencontré une célébrité ?",
+      "Qui a eu le plus d'influence sur vous en grandissant ?",
+      "Avez-vous une collection de quelque chose ?",
+      "Qui était votre professeur préféré et quel impact a-t-il eu sur vous ?",
+      "Quel est le passe-temps le plus étrange que vous ayez eu ?",
+      "Quels ont été les tournants de votre vie ?",
+      "Racontez une histoire sur vous, n'importe quelle histoire.",
+      "Avez-vous eu une prise de conscience qui a changé votre vie ?",
+      "Quel livre a eu un grand impact sur votre façon de penser ?", "Quel livre a eu un grand impact sur votre façon de penser ?",
+      "Quel film aimez-vous alors que la plupart des gens le trouvent mauvais ?",
+      "Quelle est la plus ancienne chanson que vous vous souvenez avoir écoutée ?",
+      "Qu'avez-vous appris de vos anciens managers ?",
+      "Quel est votre parcours professionnel auquel les gens ne s'attendent pas ?",
+      "Quels sont les projets dont vous êtes le plus fier ?",
+      "Quelle est une anecdote amusante sur vos précédents emplois/missions ?",
+      "Racontez votre dernier projet en emoji",
+      "Quel est le prochain week-end ou voyage que vous prévoyez ?",
+      "Racontez vos dernières (ou préférées) vacances en emoji",
+      "Quel est le meilleur conseil qu'on vous ait donné récemment ?",
+      "Quel était votre dernier déguisement d'Halloween ?",
+      "Quel est le dernier livre ou article intéressant que vous avez lu ?",
+      "Quelle est la dernière vidéo que vous avez vue ?",
+      "Qu'est-ce que vous apprenez ?",
+      "Avez-vous trouvé un nouveau restaurant et qu'avez-vous mangé ?",
+      "Quelle émission de télévision avez-vous regardée récemment ?",
+      "Quel plat avez-vous cuisiné récemment ?",
+      "Comment avez-vous réagi à [insérer la nouvelle/l'événement] ?",
+      "Comment ça va à la maison ?",
+      "Que prévoyez-vous pour vos prochaines vacances ?",
+      "Que prévoyez-vous pour votre prochain week-end ?",
+      "Êtes-vous sortis dans un endroit amusant récemment ?",
+      "Qu'avez-vous accompli en dehors du bureau ?",
+      "Quelle est votre application préférée sur votre écran d'accueil en ce moment ? 📱",
+      "Qu'est-ce que vous changez dans votre vie quotidienne ?",
+      "Quelle est votre dernière chanson/track préférée ?",
+      "Quelle a été votre victoire cette semaine ?",
+      "Qu'est-ce qui s'est bien passé cette semaine et dont il faut se souvenir ?",
+      "Qu'est-ce qui a mal tourné cette semaine ? Qu'avons-nous appris ?",
+      "Que devrions-nous faire différemment la prochaine fois ?",
+      "Qu'est-ce qui nous intrigue encore ?",
+      "Où et quand est-ce que ça a mal tourné dans ce sprint ?",
+      "Qu'attendez-vous, de qui ?",
+      "Quels outils ou techniques se sont avérés utiles ? Lesquels n'ont pas été utiles ?",
+      "Quel a été le plus grand obstacle à la réalisation de notre objectif ?",
+      "Si vous pouviez changer une chose, quelle serait-elle ?",
+      "Qu'est-ce qui vous empêche de dormir la nuit ?",
+      "Quelle est la chose que vous ne pouvez pas jeter ?",
+      "Quelle est la première chose que vous faites en vous levant ?",
+      "Vous avez rendez-vous dans un café : que commandez-vous à boire ?",
+      "Quel aliment pourriez-vous manger au point d'en être malade ?",
+      "Quel légume mal aimé aimez-vous ?",
+      "Qu'aimez-vous faire pendant votre temps libre ?",
+      "Quelle caractéristique admirez-vous le plus chez les autres ?",
+      "Quelle est votre habitude la plus bizarre ?",
+      "Si vous pouviez demander plus de saisons d'une série télévisée, ce serait...",
+      "Quel est votre jeu de société préféré ? 🎲",
+      "Quel est votre gadget intelligent préféré pour la maison ? 🏡",
+      "Quelle expression avez-vous emprunté à quelqu'un ?",
+      "Terminez la phrase : \"Le travail ne serait pas le même sans _____\"",
+      "Quelles sont vos heures les plus productives ?",
+      "Quelles sont vos boissons/snacks préférés en réunion ?",
+      "À quelle heure déjeunez-vous habituellement ?",
+      "Comment rechargez-vous vos batteries ?",
+      "Que faire ou éviter le jour de votre anniversaire ?",
+      "Qu'est-ce qui vous démotive ?",
+      "Comment vous contacter en fonction de l'urgence de la demande ?",
+      "Qu'est-ce qui vous fait dire que vous avez passé une bonne journée au travail ?",
+      "Quelle est votre personnalité MBTI ?",
+      "Quel véhicule, réel ou fictif, rêvez-vous de conduire et pourquoi ?",
+      "Classez ces animaux par ordre de force, expliquez pourquoi : 🦛, 🦏, 🦍 et 🐘",
+      "Si vous pouviez changer un acteur ou une actrice dans un film...",
+      "Quelle est la pire combinaison de nourriture que vous pouvez imaginer ?",
+      "Quel est votre deuxième Jedi préféré ?",
+      "À quel personnage de fiction vous identifiez-vous le plus ?",
+      "Inventez un sport que vous rêveriez de pratiquer",
+      "Si du jus coulait dans vos veines, qu'est-ce que ce serait ?",
+      "Si vous deviez choisir un seul type de véhicule pour faire le tour du monde, lequel serait-il, pourquoi et à quoi ressemblerait votre itinéraire ?",
+      "Vous trouvez la baguette d'Harry Potter et vous sentez que vous savez l'utiliser. Quelle est la première incantation que vous prononcez ?",
+      "Si vous aviez une machine spatio-temporelle, où et quand iriez-vous ?",
+      "Quel est votre mois préféré ?",
+      "Envisageriez-vous de faire mettre votre cerveau dans un bocal si cela vous permettait de vivre éternellement ?",
+      "Si la cryogénisation était couverte par les soins de santé, le feriez-vous ?",
+      "Si une personne proche de vous était remplacée par un clone, combien de temps mettriez-vous à le remarquer ?",
+      "À quel point êtes-vous à l'aise avec le fait que nous diffusons notre position à tous les extraterrestres de l'univers ?",
+      "Quelle est la meilleure farce que vous ayez faite ?",
+      "Quelle est votre rue préférée au Monopoly ?",
+      "Si vous pouviez devenir le président de n'importe quel pays, lequel choisiriez-vous ?",
+      "Si vous pouviez retirer un produit des rayons des supermarchés, quel serait-il ?",
+      "Si vous aviez une arme personnelle unique, comme le marteau de Thor, quel serait son nom ?",
+      "Le temps s'arrête pendant un an, sauf pour vous et ceux que vous touchez. Que faites-vous ?",
+      "Vous venez d'apprendre que votre pire personnage historique est votre ancêtre. Qui est-ce et que se passe-t-il ensuite ?"
+    ]
+    let fonts = [
+      "font-family: 'Alegreya Sans', sans-serif;",
+      "font-family: 'Kavoon', cursive;",
+      "font-family: 'Nunito', sans-serif;",
+      "font-family: 'Oleo Script Swash Caps', cursive;",
+      "font-family: 'Paytone One', sans-serif;",
+      "font-family: 'Work Sans', sans-serif;",
+    ]
+    let icebreakerSpan = document.getElementById('icebreaker')
+    icebreakerSpan.innerHTML = icebreakers[icebreakers.length * Math.random() | 0];
+    icebreakerSpan.style = fonts[fonts.length * Math.random() | 0];
+  </script>
+  <script src="https://kit.fontawesome.com/220febb073.js" crossorigin="anonymous"></script>
+</html>
