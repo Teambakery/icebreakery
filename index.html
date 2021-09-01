@@ -46,9 +46,8 @@
           <a id="mail-icebreaker" href="" title="Envoyer la question" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
             <i class="fas fa-envelope"/></i>
           </a>
-          <a id="share-icebreaker" title="Partager cette question" href="" class="relative inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" target="_blank">
-            <i class="fas fa-share pointer-events-none"/></i>
-            <span class="absolute inline-block" id="copy-status">Copié dans le presse-papier</span>
+          <a id="share-icebreaker" title="Partager cette question" href="" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" target="_blank">
+            <i class="fas fa-share"/></i>
           </a>
         </div>
         <div class="rounded-md bg-yellow-400 p-4 mt-12 sm:mt-24 max-w-2xl mx-auto text-sm">
@@ -236,32 +235,6 @@
 
     document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker;
     document.getElementById('share-icebreaker').href = "?q=" + question_id + "&f=" + font_id;
-
-    document.addEventListener(
-      'click',
-      function(event) {
-        debugger
-        // Only fire if the target has id copy
-        if (!event.target.matches('#share-icebreaker')) return;
-
-        if (!navigator.clipboard) {
-          // Clipboard API not available
-          return;
-        }
-        const text = event.target.href;
-        try {
-          navigator.clipboard.writeText(text);
-          document.getElementById('copy-status').innerText = 'Copié dans le presse-papier';
-          setTimeout(function() {
-            document.getElementById('copy-status').innerText = '';
-          }, 1200);
-          event.preventDefault();
-        } catch (err) {
-          console.error('Failed to copy!', err);
-        }
-      },
-      false
-    );
   </script>
   <script src="https://kit.fontawesome.com/220febb073.js" crossorigin="anonymous"></script>
 </html>
