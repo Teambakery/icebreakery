@@ -29,6 +29,16 @@
   <meta property="twitter:description" content="Cliquez: vous êtes servi.
   Un autre ? Rafraîchissez la page.">
   <meta property="twitter:image" content="social_image.png">
+  <style>
+    .rotate-45 {
+        --transform-rotate: 45deg;
+        transform: rotate(45deg);
+    }
+
+    .group:hover .group-hover\:flex {
+        display: flex;
+    }
+  </style>
 </head>
 <body class="bg-yellow-500">
   <!-- Hero -->
@@ -40,25 +50,54 @@
           <span id="icebreaker" class="block" style="font-family: 'Nunito', sans-serif;"></span>
         </h2>
         <div>
-          <button onClick="window.location.href=window.location.href.split('?')[0]" type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+          <!-- <button onClick="window.location.href=window.location.href.split('?')[0]" type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
             <i class="fas fa-redo-alt"/></i>
           </button>
           <a id="mail-icebreaker" href="" title="Envoyer la question" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
             <i class="fas fa-envelope"/></i>
           </a>
-          <a id="share-icebreaker" title="Partager cette question" href="" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" target="_blank">
+          <a id="share-icebreaker" title="Partager cette question" href="" class="relative inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
             <i class="fas fa-share"/></i>
-          </a>
+            <span id="copy-status" class="absolute bottom-0">Lien copié</span>
+          </a> -->
+          <div class="relative inline-flex flex-col items-center group">
+            <button onClick="window.location.href=window.location.href.split('?')[0]" type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+              <i class="fas fa-redo-alt"/></i>
+            </button>
+            <div class="absolute bottom-0 flex flex-col items-center hidden mb-12 group-hover:flex">
+              <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Un autre !</span>
+              <div class="w-3 h-3 -mt-2 rotate-45 bg-yellow-700"></div>
+            </div>
+          </div>
+          <div class="relative inline-flex flex-col items-center group">
+            <a id="mail-icebreaker" href="" title="Envoyer la question" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+              <i class="fas fa-envelope"/></i>
+            </a>
+            <div class="absolute bottom-0 flex flex-col items-center hidden mb-12 group-hover:flex">
+              <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Envoyer par email</span>
+              <div class="w-3 h-3 -mt-2 rotate-45 bg-yellow-700"></div>
+            </div>
+          </div>
+          <div class="relative inline-flex flex-col items-center group">
+            <a id="share-icebreaker" title="Partager cette question" href="" class="relative inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+              <i class="fas fa-share"/></i>
+              <span id="copy-status" class="absolute left-0 w-max ml-12"></span>
+            </a>
+            <div class="absolute bottom-0 flex flex-col items-center hidden mb-12 group-hover:flex">
+              <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Copier et partager le lien</span>
+              <div class="w-3 h-3 -mt-2 rotate-45 bg-yellow-700"></div>
+            </div>
+          </div>
         </div>
-        <div class="rounded-md bg-yellow-400 p-4 mt-12 sm:mt-24 max-w-2xl mx-auto text-sm">
+        <div class="rounded-md bg-yellow-400 p-4 mt-12 sm:mt-4 mr-4 max-w-2xl mx-auto text-sm sm:absolute top-0 right-0">
           <div class="flex">
-            <div class="flex-shrink-0 mt-3">
-              <i class="fas fa-lightbulb fa-lg text-yellow-700"></i>
+            <div class="flex-shrink-0 mt-2">
+              <i class="fas fa-star fa-lg text-yellow-700"></i>
             </div>
             <div class="ml-3">
               <div class="mt-2 text-sm text-yellow-700 text-left">
                 <p>
-                  Bookmarkez cette page pour toujours avoir un icebreaker à partager en début de journée, en réunion ou à la pause déjeuner.
+                  Bookmarkez cette page pour toujours avoir un icebreaker à portée de main.
                 </p>
               </div>
             </div>
@@ -68,16 +107,19 @@
     </div>
     <!-- Newsletter -->
     <div class="sm:absolute sm:bottom-0 sm:left-0">
-      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 lg:flex lg:items-center">
+      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 lg:flex lg:items-end">
         <div class="lg:flex-1">
           <h2 class="text-lg font-extrabold sm:text-2xl text-yellow-700">
-            Offert part <a href="https://teambakery.com" class="hover:underline">Teambakery</a>
+            Offert par <a href="https://teambakery.com" class="hover:underline">Teambakery</a>
           </h2>
           <p class="mt-3 max-w-3xl text-md text-white">
-            Envie de conseils pratiques pour animer votre équipe ? <i class="fas fa-arrow-right ml-2"></i>
+            Chaque semaine nos recettes pratiques pour animer votre équipe <i class="fas fa-arrow-right ml-2"></i>
           </p>
         </div>
         <div id="mc_embed_signup" class="mt-8 lg:mt-0 lg:ml-8">
+          <p class="mb-2 text-sm text-yellow-200">
+            100% gratuit. 1 mail/semaine.
+          </p>
           <form action="https://teambakery.us5.list-manage.com/subscribe/post?u=5f58ef8f40e9c83c27e4d84b2&amp;id=73eecf6954" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="sm:flex" target="_blank" novalidate>
             <label for="email-address" class="sr-only">Email address</label>
             <input id="mce-EMAIL" name="EMAIL" type="email" autocomplete="email" required class="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500 sm:max-w-xs rounded-md" placeholder="Email pro">
@@ -88,7 +130,7 @@
             <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5f58ef8f40e9c83c27e4d84b2_73eecf6954" tabindex="-1" value=""></div>
             <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-              <input type="submit" value="Recevoir gratuitement" name="subscribe" id="mc-embedded-subscribe" class="w-full flex items-center justify-center py-3 px-5 border border-transparent text-base font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 cursor-pointer">
+              <input type="submit" value="Nous rejoindre" name="subscribe" id="mc-embedded-subscribe" class="w-full flex items-center justify-center py-3 px-5 border border-transparent text-base font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 cursor-pointer">
             </div>
           </form>
         </div>
@@ -96,10 +138,6 @@
     </div>
     <!-- Made by -->
     <div class="sm:absolute sm:bottom-0 sm:right-0 p-8 text-yellow-700 text-center sm:text-right sm:flex">
-      <div>
-        Cuisiné par <a href="https://twitter.com/sowenjub" class="hover:underline font-bold">Arnaud</a> et <a href="https://twitter.com/ba_b" class="hover:underline font-bold">Baptiste</a>,
-        <br/><a href="https://teambakery.com" class="hover:underline font-bold">teambakery.com</a>
-      </div>
       <div class="flex-shrink-0 fill-current h-12 sm:w-12 sm:ml-8 mt-4 sm:mt-0">
         <svg width="100%" height="100%" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="Logo-disc" serif:id="Logo disc"></g><g id="Logo-square" serif:id="Logo square"></g><g id="Logo-solo" serif:id="Logo solo"><rect id="teambakery-icon-black-nosp" serif:id="teambakery icon black nosp" x="0" y="0" width="1024" height="1024" style="fill:none;"/><clipPath id="_clip1"><rect id="teambakery-icon-black-nosp1" serif:id="teambakery icon black nosp" x="0" y="0" width="1024" height="1024"/></clipPath><g clip-path="url(#_clip1)"><g><path d="M967.847,576.365c5.447,1.374 10.741,3.408 15.807,6.136c42.756,23.021 53.191,86.801 23.287,142.338c-29.903,55.537 -88.894,81.935 -131.649,58.913c-9.012,-4.852 -16.588,-11.515 -22.653,-19.53c5.332,-4.217 10.562,-8.674 15.676,-13.361c3.666,6.012 9.29,11.43 16.455,15.288c17.77,9.568 38.331,5.943 45.887,-8.09c7.556,-14.033 -14.427,-7.768 -32.197,-17.336c-4.411,-2.375 -8.15,-5.504 -11.395,-8.651c31.17,-34.094 56.724,-77.374 72.816,-127.195c3.07,-9.506 5.722,-19.02 7.966,-28.512Z"/><path d="M763.553,342.366c19.42,-2.31 38.981,-0.663 57.93,5.458c89.527,28.916 131.717,146.803 94.157,263.092c-37.561,116.288 -140.739,187.223 -230.265,158.307c-14.318,-4.625 -27.426,-11.526 -39.19,-20.331c10.379,-8.057 20.303,-17.001 29.711,-26.751c6.369,4.204 13.551,7.691 21.384,10.222c37.208,12.018 75.122,-2.081 84.612,-31.464c9.49,-29.383 -30.208,-9.757 -67.416,-21.775c-1.072,-0.346 -2.13,-0.715 -3.174,-1.104c40.766,-60.991 65.453,-140.593 65.453,-227.626c0,-37.707 -4.634,-74.02 -13.202,-108.028Z"/><path d="M509.242,210.798c116.005,0 210.186,122.335 210.186,273.017c0,150.682 -94.181,273.017 -210.186,273.017c-116.006,0 -210.187,-122.335 -210.187,-273.017c0,-150.682 94.181,-273.017 210.187,-273.017Zm0,429.288c48.212,0 87.355,-38.074 87.355,0c0,38.074 -39.143,68.985 -87.355,68.985c-48.213,0 -87.356,-30.911 -87.356,-68.985c0,-38.074 39.143,0 87.356,0Z"/><path d="M374.988,750.952c-11.026,7.826 -23.181,14.013 -36.363,18.271c-89.526,28.916 -192.704,-42.019 -230.265,-158.307c-37.56,-116.289 4.63,-234.176 94.157,-263.092c17.2,-5.556 34.904,-7.426 52.549,-5.996c-8.655,34.163 -13.338,70.66 -13.338,108.566c0,87.756 25.099,167.958 66.474,229.144c-36.819,11.146 -75.472,-7.674 -66.094,21.361c9.49,29.383 47.404,43.482 84.612,31.464c6.459,-2.087 12.475,-4.824 17.958,-8.077c9.6,9.749 19.725,18.666 30.31,26.666Z"/><path d="M56.153,576.365c2.244,9.492 4.896,19.006 7.966,28.512c16.092,49.821 41.646,93.101 72.816,127.195c-3.245,3.147 -6.984,6.276 -11.395,8.651c-17.77,9.568 -39.753,3.303 -32.197,17.336c7.556,14.033 28.117,17.658 45.887,8.09c7.165,-3.858 12.789,-9.276 16.455,-15.288c5.114,4.687 10.344,9.144 15.676,13.361c-6.065,8.015 -13.641,14.678 -22.653,19.53c-42.755,23.022 -101.746,-3.376 -131.649,-58.913c-29.904,-55.537 -19.469,-119.317 23.287,-142.338c5.066,-2.728 10.36,-4.762 15.807,-6.136Z"/></g></g></g><g id="Horizontal"></g><rect id="Références" x="-8400" y="-1500" width="16064.5" height="2902.68" style="fill:none;"/></svg>
       </div>
@@ -240,6 +278,32 @@
 
     document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker;
     document.getElementById('share-icebreaker').href = "?q=" + question_id + "&f=" + font_id;
+
+    document.addEventListener(
+      'click',
+      function(event) {
+        // Only fire if the target has id copy
+        if (!event.target.matches('#share-icebreaker')) return;
+
+        if (!navigator.clipboard) {
+          // Clipboard API not available
+          return;
+        }
+        event.preventDefault();
+        //event.stopPropagation();
+        const text = event.target.href;
+        try {
+          navigator.clipboard.writeText(text);
+          document.getElementById('copy-status').innerText = '✓ Lien copié, à vous de coller !';
+          setTimeout(function() {
+            document.getElementById('copy-status').innerText = '';
+          }, 300);
+        } catch (err) {
+          console.error('Failed to copy!', err);
+        }
+      },
+      false
+    );
   </script>
   <script src="https://kit.fontawesome.com/220febb073.js" crossorigin="anonymous"></script>
 </html>
