@@ -50,6 +50,8 @@
         display: flex;
     }
   </style>
+
+  <script src="dist/clipboard.min.js"></script>
 </head>
 <body class="bg-yellow-500">
   <!-- Hero -->
@@ -61,16 +63,6 @@
           <span id="icebreaker" class="block" style="font-family: 'Nunito', sans-serif;"></span>
         </h2>
         <div>
-          <!-- <button onClick="window.location.href=window.location.href.split('?')[0]" type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
-            <i class="fas fa-redo-alt"/></i>
-          </button>
-          <a id="mail-icebreaker" href="" title="Envoyer la question" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
-            <i class="fas fa-envelope"/></i>
-          </a>
-          <a id="share-icebreaker" title="Partager cette question" href="" class="relative inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
-            <i class="fas fa-share"/></i>
-            <span id="copy-status" class="absolute bottom-0">Lien copié</span>
-          </a> -->
           <div class="relative inline-flex flex-col items-center group">
             <button onClick="window.location.href=window.location.href.split('?')[0]" type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
               <i class="fas fa-redo-alt"/></i>
@@ -90,10 +82,10 @@
             </div>
           </div>
           <div class="relative inline-flex flex-col items-center group">
-            <a id="share-icebreaker" title="Partager cette question" href="" class="relative inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+            <button id="share-icebreaker" data-clipboard-text="" title="Partager cette question" class="relative inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
               <i class="fas fa-share"/></i>
               <span id="copy-status" class="absolute left-0 w-max ml-12"></span>
-            </a>
+            </button>
             <div class="absolute bottom-0 flex flex-col items-center hidden mb-12 group-hover:flex">
               <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Copier et partager le lien</span>
               <div class="w-3 h-3 -mt-2 rotate-45 bg-yellow-700"></div>
@@ -298,33 +290,23 @@
     let question_url = "?q=" + question_id + "&f=" + font_id;
 
     document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker + escape('\r\n\r\nRetrouvez cette question sur : ') + encodeURIComponent("https://icebreakery.app" + question_url);
-    document.getElementById('share-icebreaker').href = question_url;
+    document.getElementById('share-icebreaker').dataset.clipboardText = "https://icebreakery.app" + question_url;
 
-    document.addEventListener(
-      'click',
-      function(event) {
-        // Only fire if the target has id copy
-        if (!event.target.matches('#share-icebreaker')) return;
+    var clipboard = new ClipboardJS('#share-icebreaker');
 
-        if (!navigator.clipboard) {
-          // Clipboard API not available
-          return;
-        }
-        event.preventDefault();
-        //event.stopPropagation();
-        const text = event.target.href;
-        try {
-          navigator.clipboard.writeText(text);
-          document.getElementById('copy-status').innerText = '✓ Lien copié, à vous de coller !';
-          setTimeout(function() {
-            document.getElementById('copy-status').innerText = '';
-          }, 300);
-        } catch (err) {
-          console.error('Failed to copy!', err);
-        }
-      },
-      false
-    );
+    clipboard.on('success', function(e) {
+      document.getElementById('copy-status').innerText = '✓ Lien copié, à vous de coller !';
+      setTimeout(function() {
+        document.getElementById('copy-status').innerText = '';
+      }, 2000);
+    });
+
+    clipboard.on('error', function(e) {
+      document.getElementById('copy-status').innerText = '🧐 Impossible de copier le lien';
+      setTimeout(function() {
+        document.getElementById('copy-status').innerText = '';
+      }, 2000);
+    });
   </script>
   <script src="https://kit.fontawesome.com/220febb073.js" crossorigin="anonymous"></script>
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
