@@ -58,7 +58,7 @@
   <div class="sm:flex h-screen">
     <div class="sm:m-auto">
       <div class="max-w-5xl text-center pt-8 pb-4 px-4 sm:py-20 sm:px-6 lg:px-8">
-        <p class="mb-4 text-lg leading-6 text-yellow-200">Demandez à vos collègues</p>
+        <p id="question-headline" class="mb-4 text-lg leading-6 text-yellow-200">Demandez à vos collègues</p>
         <h2 class="text-4xl font-extrabold text-white sm:text-7xl mb-8">
           <span id="icebreaker" class="block" style="font-family: 'Nunito', sans-serif;"></span>
         </h2>
@@ -68,7 +68,7 @@
               <i class="fas fa-redo-alt"/></i>
             </button>
             <div class="absolute bottom-0 flex flex-col items-center hidden mb-12 group-hover:flex">
-              <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Un autre !</span>
+              <span id="refresh-tooltip" class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Un autre !</span>
               <div class="w-3 h-3 -mt-2 rotate-45 bg-yellow-700"></div>
             </div>
           </div>
@@ -77,7 +77,7 @@
               <i class="fas fa-envelope"/></i>
             </a>
             <div class="absolute bottom-0 flex flex-col items-center hidden mb-12 group-hover:flex">
-              <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Envoyer par email</span>
+              <span id="mail-tooltip" class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Envoyer par email</span>
               <div class="w-3 h-3 -mt-2 rotate-45 bg-yellow-700"></div>
             </div>
           </div>
@@ -87,7 +87,7 @@
               <span id="copy-status" class="absolute left-0 w-max ml-12"></span>
             </button>
             <div class="absolute bottom-0 flex flex-col items-center hidden mb-12 group-hover:flex">
-              <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Copier et partager le lien</span>
+              <span id="share-tooltip" class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-yellow-700 shadow-lg rounded-full w-max">Copier et partager le lien</span>
               <div class="w-3 h-3 -mt-2 rotate-45 bg-yellow-700"></div>
             </div>
           </div>
@@ -99,7 +99,8 @@
             </div>
             <div class="ml-3">
               <div class="mt-2 text-sm text-yellow-700 text-left">
-                <p>
+                <p class="i18n-en hidden">Bookmark this page to always have an icebreaker at hand</p>
+                <p class="i18n-fr">
                   Bookmarkez cette page pour toujours avoir un&nbsp;
                   <div class="relative inline-flex flex-col items-center group">
                     <span class="border-dotted border-b-2 border-yellow-100">icebreaker</span>
@@ -157,7 +158,117 @@
   </div>
 </body>
   <script type="text/javascript">
-    let icebreakers = [
+    const icebreakers_en = [
+      "What event in your year of birth do you feel close to?",
+      "What anecdote do you have to tell about your ancestors?",
+      "What is the most complicated dish you can cook without looking at the recipe?",
+      "Which video game have you spent the most time on lately?",
+      "What is the story behind your child's or pet's name?",
+      "How long is your longest stay abroad?",
+      "If you had to thank someone for helping you become the person you are, who would it be and what did they do for you?",
+      "Who is your favorite left-handed person?",
+      "What food do you like that other usually find gross?",
+      "Which dishes remind you of your childhood?",
+      "To what do you owe your most beautiful (or ridiculous) scar?",
+      "What's the best gift you ever received?",
+      "What phobia or fear have you managed to overcome?",
+      "What were your favorite TV series growing up ?",
+      "Which movie scared you the most ?",
+      "Can you play one or more musical instruments?",
+      "Have you ever met a celebrity?",
+      "Who had the most influence on you growing up?",
+      "Do you have a collection of something?",
+      "Who was your favorite teacher and what impact did he or she have on you?",
+      "What is the weirdest hobby you've had?",
+      "What were turning points in your life?",
+      "Tell a story about you, any story.",
+      "Have you had a realisation that changed your life?",
+      "Which book has had a big impact on your thinking? 📚",
+      "Which movie do you like that most people find bad?",
+      "What's oldest song you can remember listening to?",
+      "What did you learn from your past managers?",
+      "What career background do you have that people wouldn’t expect?",
+      "What projects are you most proud of?",
+      "What is a funny anecdote about your previous jobs/missions?",
+      "Tell your latest project in emoji",
+      "What's the next weekend or trip you're planning?",
+      "Tell your last (or favorite) vacations in emoji",
+      "What is the best advice you've been given recently?",
+      "What was your last Halloween disguise?",
+      "What is the last interesting book or article you read?",
+      "What is the last video you saw?",
+      "What are you learning?",
+      "Did you find a new restaurant and what did you have?",
+      "What TV Show did you pick up recently?",
+      "What food did you cook recently?",
+      "How did you react to [insert news/event]?",
+      "How's everyone doing at home?",
+      "What are you planning for your next holidays?",
+      "What are you planning for your next week-end out?",
+      "Did you go out somewhere fun recently?",
+      "What did you accomplish outside the office?",
+      "What's your favorite app on your homescreen right now? 📱",
+      "What are you changing in your everyday life?",
+      "What's your latest favorite song/track?",
+      "What was your win this week?",
+      "What went well this week and should be remembered?",
+      "What went wrong this week? What did we learn?",
+      "What should we do differently next time?",
+      "What still puzzles us?",
+      "Where and when did it go wrong in this sprint?",
+      "What do you expect, from who?",
+      "Which tools or techniques proved to be useful? Which not?",
+      "What was the biggest obstacle in achieving our goal?",
+      "If you could change 1 thing, what would it be?",
+      "What’s keeping you awake at night?",
+      "What thing can't you throw away?",
+      "What is the first thing you do when you get up?",
+      "You have an appointment in a café: what do you order to drink?",
+      "What food could you eat to the point of being sick?",
+      "Which unloved vegetable do you like?",
+      "What do you like to do in your spare time?",
+      "What characteristic do you admire most in others?",
+      "What is your weirdest habit?",
+      "If you could ask for more seasons of a tv show, that would be…",
+      "What's your favorite board game? 🎲",
+      "What's your favorite smart home gadget? 🏡",
+      "What expression did you borrow from someone?",
+      "Finish the sentence: \"Work wouldn't be the same without _____\"",
+      "What are your most productive hours?",
+      "What are your favorite drinks/snacks in meetings?",
+      "What time do you usually have lunch?",
+      "How do you recharge your batteries?",
+      "What to do or avoid on your birthday?",
+      "What is it that demotivates you?",
+      "How to contact you according to the urgency of the request?",
+      "What makes you say that you had a good day at work?",
+      "What's your MBTI personality?",
+      "Which vehicle, real or fictitious, do you dream of driving and why?",
+      "Order these animals by strength, explain why: 🦛, 🦏, 🦍 and 🐘",
+      "If you could change an actor or actress in a movie…",
+      "What is the worst combination of food you can imagine?",
+      "What is your 2nd favorite Jedi?",
+      "Which fictional character do you identify with the most?",
+      "Invent a sport that you would dream of practicing",
+      "If juice was flowing in your veins, what would it be ?",
+      "If you had to choose only one type of vehicle to drive around the world, which one would it be, why and what would your route look like?",
+      "You find the Harry Potter wand and feel that you know how to use it. What is the first incantation you say?",
+      "If you had a time and space machine, where and when would you go ?",
+      "What is your favorite month?",
+      "Would you consider having your brain put in a jar if it meant you could live forever?",
+      "If cryonization was covered by health care, would you do it?",
+      "If a person close to you was replaced by a clone, how long would it take you to notice?",
+      "How comfortable are you with the fact that we’re broadcasting our position to every alien in the universe?",
+      "What is the best prank you ever pulled?",
+      "What is your favorite Monopoly street?",
+      "If you could become the president of any country, which one would you pick?",
+      "If you could remove from the supermarkets shelves one product, what would it be?",
+      "If you had a uniq personal weapon, like Thor’s hammer, what would be its name?",
+      "Time stops for one year except for you and those you touch. What do you do?",
+      "You just learned that your worst historical figure is your ancestor. Who is it and what happens next?"
+    ]
+
+    const icebreakers_fr = [
       "De quel événement de votre année de naissance vous sentez-vous proche ?",
       "Quelle anecdote avez-vous à raconter à propos de vos ancêtres ?",
       "Quel est le plat le plus compliqué que vous sachiez cuisiner sans en regarder la recette ?",
@@ -266,7 +377,13 @@
       "Le temps s'arrête pendant un an, sauf pour vous et ceux que vous touchez. Que faites-vous ?",
       "Vous venez d'apprendre que votre pire personnage historique est votre ancêtre. Qui est-ce et que se passe-t-il ensuite ?"
     ]
-    let fonts = [
+
+    const icebreakers = {
+      "en": icebreakers_en,
+      "fr": icebreakers_fr
+    }
+
+    const fonts = [
       "font-family: 'Alegreya Sans', sans-serif;",
       "font-family: 'Kavoon', cursive;",
       "font-family: 'Nunito', sans-serif;",
@@ -280,8 +397,28 @@
     const question_param = urlParams.get('q');
     const font_param = urlParams.get('f');
 
-    let question_id = question_param == null ? (icebreakers.length * Math.random() | 0) : parseInt(question_param);
-    let icebreaker = icebreakers[question_id];
+    let userLang = (urlParams.get('hl') || navigator.language || navigator.userLanguage)
+    let lang = userLang == null ? "en" : userLang.split("-")[0];
+
+    function hideElement(el, i){ el.classList.add("hidden") }
+    function showElement(el, i){ el.classList.remove("hidden") }
+
+    // I18n
+    if (lang == "fr") {
+      Array.prototype.forEach.call(document.getElementsByClassName('i18n-en'), hideElement);
+      Array.prototype.forEach.call(document.getElementsByClassName('i18n-fr'), showElement);
+    } else {
+      Array.prototype.forEach.call(document.getElementsByClassName('i18n-fr'), hideElement);
+      Array.prototype.forEach.call(document.getElementsByClassName('i18n-en'), showElement);
+    }
+    document.getElementById('question-headline').innerHTML = lang == "fr" ? "Demandez à vos collègues" : "Ask your teammates"
+    document.getElementById('refresh-tooltip').innerHTML = lang == "fr" ? "Un autre !" : "Another one!"
+    document.getElementById('mail-tooltip').innerHTML = lang == "fr" ? "Envoyer par email" : "Send by email"
+    document.getElementById('share-tooltip').innerHTML = lang == "fr" ? "Copier et partager le lien" : "Copy and share link"
+
+    // Icebreaker question
+    let question_id = question_param == null ? (icebreakers[lang].length * Math.random() | 0) : parseInt(question_param);
+    let icebreaker = icebreakers[lang][question_id];
     let font_id = font_param == null ? fonts.length * Math.random() | 0 : parseInt(font_param);
 
     let icebreakerSpan = document.getElementById('icebreaker')
@@ -290,20 +427,24 @@
 
     let question_url = "?q=" + question_id + "&f=" + font_id;
 
-    document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker + escape('\r\n\r\nRetrouvez cette question sur : ') + encodeURIComponent("https://icebreakery.app" + question_url);
+    if (lang == "fr") {
+      document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker + escape('\r\n\r\nRetrouvez cette question sur : ') + encodeURIComponent("https://icebreakery.app" + question_url);
+    } else {
+      document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 By the way&body=" + icebreaker + escape('\r\n\r\nFind this question on: ') + encodeURIComponent("https://icebreakery.app" + question_url);
+    }
     document.getElementById('share-icebreaker').dataset.clipboardText = "https://icebreakery.app" + question_url;
 
     var clipboard = new ClipboardJS('#share-icebreaker');
 
     clipboard.on('success', function(e) {
-      document.getElementById('copy-status').innerText = '✓ Copié !';
+      document.getElementById('copy-status').innerText = lang == "fr" ? '✓ Copié !' : '✓ Copied!';
       setTimeout(function() {
         document.getElementById('copy-status').innerText = '';
       }, 2000);
     });
 
     clipboard.on('error', function(e) {
-      document.getElementById('copy-status').innerText = '🧐 Impossible de copier le lien';
+      document.getElementById('copy-status').innerText = lang == "fr" ? '🧐 Impossible de copier le lien' : '🧐 Can\'t copy link';
       setTimeout(function() {
         document.getElementById('copy-status').innerText = '';
       }, 2000);
