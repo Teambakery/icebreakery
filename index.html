@@ -295,8 +295,10 @@
     icebreakerSpan.innerHTML = icebreaker;
     icebreakerSpan.style = fonts[font_id];
 
-    document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker;
-    document.getElementById('share-icebreaker').href = "?q=" + question_id + "&f=" + font_id;
+    let question_url = "?q=" + question_id + "&f=" + font_id;
+
+    document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker + escape('\r\n\r\nRetrouvez cette question sur : ') + encodeURIComponent("https://icebreakery.app" + question_url);
+    document.getElementById('share-icebreaker').href = question_url;
 
     document.addEventListener(
       'click',
