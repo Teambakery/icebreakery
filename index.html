@@ -295,7 +295,7 @@
     var clipboard = new ClipboardJS('#share-icebreaker');
 
     clipboard.on('success', function(e) {
-      document.getElementById('copy-status').innerText = '✓ Lien copié, à vous de coller !';
+      document.getElementById('copy-status').innerText = '✓ Copié !';
       setTimeout(function() {
         document.getElementById('copy-status').innerText = '';
       }, 2000);
