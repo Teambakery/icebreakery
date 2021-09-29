@@ -127,19 +127,28 @@
       </div>
     </div>
     <!-- Newsletter -->
-    <div class="sm:absolute sm:bottom-0 sm:left-0 hidden" id="newsletter-form">
+    <div class="sm:absolute sm:bottom-0 sm:left-0" id="newsletter-form">
       <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 lg:flex lg:items-end">
         <div class="lg:flex-1">
-          <h2 class="text-lg font-extrabold sm:text-2xl text-yellow-700">
+          <h2 class="text-lg font-extrabold sm:text-2xl text-yellow-700 i18n-fr">
             Offert par <a href="https://teambakery.com" class="hover:underline">Teambakery</a>
           </h2>
-          <p class="mt-3 max-w-3xl text-md text-white">
+          <h2 class="text-lg font-extrabold sm:text-2xl text-yellow-700 i18n-en">
+            Offered by <a href="https://teambakery.com" class="hover:underline">Teambakery</a>
+          </h2>
+          <p class="mt-3 max-w-3xl text-md text-white i18n-fr">
             Chaque semaine nos recettes pratiques pour animer votre équipe <i class="fas fa-arrow-right ml-2"></i>
+          </p>
+          <p class="mt-3 max-w-3xl text-md text-white i18n-en">
+            Every week our practical recipes to animate your team (in 🇫🇷 French) <i class="fas fa-arrow-right ml-2"></i>
           </p>
         </div>
         <div id="mc_embed_signup" class="mt-8 lg:mt-0 lg:ml-8">
-          <p class="mb-2 text-sm text-yellow-200">
+          <p class="mb-2 text-sm text-yellow-200 i18n-fr">
             100% gratuit. 1 mail/semaine.
+          </p>
+          <p class="mb-2 text-sm text-yellow-200 i18n-en">
+            100% free. 1 mail/week.
           </p>
           <form action="https://teambakery.us5.list-manage.com/subscribe/post?u=5f58ef8f40e9c83c27e4d84b2&amp;id=73eecf6954&utm_source=icebreakery" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="sm:flex" target="_blank" novalidate>
             <label for="email-address" class="sr-only">Email address</label>
@@ -443,9 +452,10 @@
 
     if (lang == "fr") {
       document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker + escape('\r\n\r\nRetrouvez cette question sur : ') + encodeURIComponent(question_url);
-      showElement(document.getElementById('newsletter-form'))
     } else {
       document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 By the way&body=" + icebreaker + escape('\r\n\r\nFind this question on: ') + encodeURIComponent(question_url);
+      document.getElementById('mce-EMAIL').placeholder = "Pro email";
+      document.getElementById('mc-embedded-subscribe').value = "Join us";
     }
     document.getElementById('share-icebreaker').dataset.clipboardText = question_url;
 
