@@ -1,6 +1,6 @@
 <!-- 👋 Hello -->
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,11 +51,17 @@
     }
   </style>
 
-  <script src="dist/clipboard.min.js"></script>
+  <script src="../dist/clipboard.min.js"></script>
+  <script type="text/javascript">
+    const lang = "fr";
+  </script>
 </head>
 <body class="bg-yellow-500">
   <div id="i18n-alt-fr" class="hidden absolute inset-x-0 top-0 text-center p-8">
-    <a id="i18n-alt-fr-link" class="text-center text-yellow-700 rounded-full bg-yellow-400 p-2 px-4" href="/fr">🇫🇷 La même en français ?</a>
+    <a id="i18n-alt-fr-link" class="text-sm text-center text-yellow-700 rounded-full bg-yellow-400 p-2 px-4" href="/fr">🇫🇷 La même en français ?</a>
+  </div>
+  <div id="i18n-alt-en" class="hidden absolute inset-x-0 top-0 text-center p-8">
+    <a id="i18n-alt-en-link" class="text-sm text-center text-yellow-700 rounded-full bg-yellow-400 p-2 px-4" href="/">🇬🇧 Same one in english?</a>
   </div>
   <!-- Hero -->
   <div class="sm:flex h-screen">
@@ -121,7 +127,7 @@
       </div>
     </div>
     <!-- Newsletter -->
-    <div class="sm:absolute sm:bottom-0 sm:left-0">
+    <div class="sm:absolute sm:bottom-0 sm:left-0 hidden" id="newsletter-form">
       <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 lg:flex lg:items-end">
         <div class="lg:flex-1">
           <h2 class="text-lg font-extrabold sm:text-2xl text-yellow-700">
@@ -160,7 +166,6 @@
       </a>
     </div>
   </div>
-</body>
   <script type="text/javascript">
     const icebreakers_en = [
       "What event in your year of birth do you feel close to?",
@@ -405,8 +410,6 @@
     const question_param = urlParams.get('q');
     const font_param = urlParams.get('f');
 
-    const lang = "fr"
-
     let userLang = (urlParams.get('hl') || navigator.language || navigator.userLanguage)
     let preferredLang = userLang == null ? lang : userLang.split("-")[0];
 
@@ -435,14 +438,16 @@
     icebreakerSpan.innerHTML = icebreaker;
     icebreakerSpan.style = fonts[font_id];
 
-    let question_url = "?q=" + question_id + "&f=" + font_id;
+    let question_path = "?q=" + question_id + "&f=" + font_id;
+    let question_url = "https://icebreakery.app" + question_path;
 
     if (lang == "fr") {
-      document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker + escape('\r\n\r\nRetrouvez cette question sur : ') + encodeURIComponent("https://icebreakery.app" + question_url);
+      document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker + escape('\r\n\r\nRetrouvez cette question sur : ') + encodeURIComponent(question_url);
+      showElement(document.getElementById('newsletter-form'))
     } else {
-      document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 By the way&body=" + icebreaker + escape('\r\n\r\nFind this question on: ') + encodeURIComponent("https://icebreakery.app" + question_url);
+      document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 By the way&body=" + icebreaker + escape('\r\n\r\nFind this question on: ') + encodeURIComponent(question_url);
     }
-    document.getElementById('share-icebreaker').dataset.clipboardText = "https://icebreakery.app" + question_url;
+    document.getElementById('share-icebreaker').dataset.clipboardText = question_url;
 
     var clipboard = new ClipboardJS('#share-icebreaker');
 
@@ -462,10 +467,15 @@
 
     if (preferredLang != lang && preferredLang == "fr") {
       showElement(document.getElementById('i18n-alt-fr'))
-      document.getElementById('i18n-alt-fr-link').href = "/fr" + question_url
+      document.getElementById('i18n-alt-fr-link').href = "./fr/index.html" + question_path
+    }
+    if (preferredLang != lang && preferredLang == "en") {
+      showElement(document.getElementById('i18n-alt-en'))
+      document.getElementById('i18n-alt-en-link').href = "/" + question_path
     }
   </script>
   <script src="https://kit.fontawesome.com/220febb073.js" crossorigin="anonymous"></script>
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+</body>
 </html>

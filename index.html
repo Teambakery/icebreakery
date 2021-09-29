@@ -1,6 +1,6 @@
 <!-- 👋 Hello -->
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -52,10 +52,16 @@
   </style>
 
   <script src="dist/clipboard.min.js"></script>
+  <script type="text/javascript">
+    const lang = "en";
+  </script>
 </head>
 <body class="bg-yellow-500">
   <div id="i18n-alt-fr" class="hidden absolute inset-x-0 top-0 text-center p-8">
     <a id="i18n-alt-fr-link" class="text-sm text-center text-yellow-700 rounded-full bg-yellow-400 p-2 px-4" href="/fr">🇫🇷 La même en français ?</a>
+  </div>
+  <div id="i18n-alt-en" class="hidden absolute inset-x-0 top-0 text-center p-8">
+    <a id="i18n-alt-en-link" class="text-sm text-center text-yellow-700 rounded-full bg-yellow-400 p-2 px-4" href="/">🇬🇧 Same one in english?</a>
   </div>
   <!-- Hero -->
   <div class="sm:flex h-screen">
@@ -102,8 +108,8 @@
             </div>
             <div class="ml-3">
               <div class="mt-2 text-sm text-yellow-700 text-left">
-                <span class="i18n-en hidden">Bookmark this page to always have an icebreaker at hand</p>
-                <span class="i18n-fr">
+                <p class="i18n-en hidden">Bookmark this page to always have an icebreaker at hand</p>
+                <p class="i18n-fr">
                   Bookmarkez cette page pour toujours avoir un&nbsp;
                   <span class="relative inline-flex flex-col items-center group">
                     <span class="border-dotted border-b-2 border-yellow-100">icebreaker</span>
@@ -160,7 +166,6 @@
       </a>
     </div>
   </div>
-</body>
   <script type="text/javascript">
     const icebreakers_en = [
       "What event in your year of birth do you feel close to?",
@@ -405,8 +410,6 @@
     const question_param = urlParams.get('q');
     const font_param = urlParams.get('f');
 
-    const lang = "en"
-
     let userLang = (urlParams.get('hl') || navigator.language || navigator.userLanguage)
     let preferredLang = userLang == null ? lang : userLang.split("-")[0];
 
@@ -436,7 +439,7 @@
     icebreakerSpan.style = fonts[font_id];
 
     let question_path = "?q=" + question_id + "&f=" + font_id;
-    let question_url = "https://icebreakery.app" + question_path
+    let question_url = "https://icebreakery.app" + question_path;
 
     if (lang == "fr") {
       document.getElementById('mail-icebreaker').href = "mailto:?subject=🥐 Au fait…&body=" + icebreaker + escape('\r\n\r\nRetrouvez cette question sur : ') + encodeURIComponent(question_url);
@@ -466,8 +469,13 @@
       showElement(document.getElementById('i18n-alt-fr'))
       document.getElementById('i18n-alt-fr-link').href = "./fr/index.html" + question_path
     }
+    if (preferredLang != lang && preferredLang == "en") {
+      showElement(document.getElementById('i18n-alt-en'))
+      document.getElementById('i18n-alt-en-link').href = "/" + question_path
+    }
   </script>
   <script src="https://kit.fontawesome.com/220febb073.js" crossorigin="anonymous"></script>
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+</body>
 </html>
