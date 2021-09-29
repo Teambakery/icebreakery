@@ -438,7 +438,7 @@
     icebreakerSpan.innerHTML = icebreaker;
     icebreakerSpan.style = fonts[font_id];
 
-    let question_path = "?q=" + question_id + "&f=" + font_id;
+    let question_path = (lang == "fr" ? "/fr" : "") + "?q=" + question_id + "&f=" + font_id;
     let question_url = "https://icebreakery.app" + question_path;
 
     if (lang == "fr") {
