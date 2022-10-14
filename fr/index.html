@@ -488,7 +488,8 @@
     icebreakerSpan.innerHTML = icebreaker;
     icebreakerSpan.style = fonts[font_id];
 
-    let question_path = (lang == "fr" ? "/fr" : "") + "?q=" + question_id + "&f=" + font_id;
+    let question_params = "?q=" + question_id + "&f=" + font_id;
+    let question_path = (lang == "fr" ? "/fr" : "") + question_params;
     let question_url = "https://icebreakery.app" + question_path;
 
     if (lang == "fr") {
@@ -521,7 +522,7 @@
     }
     if (preferredLang != lang && preferredLang == "en") {
       showElement(document.getElementById('i18n-alt-en'))
-      document.getElementById('i18n-alt-en-link').href = "/index.html" + question_path
+      document.getElementById('i18n-alt-en-link').href = "../" + question_params
     }
   </script>
   <script src="https://kit.fontawesome.com/220febb073.js" crossorigin="anonymous"></script>
