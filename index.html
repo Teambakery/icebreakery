@@ -101,6 +101,10 @@
             </div>
           </div>
         </div>
+        <div class="mt-6">
+          <a href="#library" class="text-sm text-yellow-200 underline i18n-en hidden">Browse the full library ↓</a>
+          <a href="#library" class="text-sm text-yellow-200 underline i18n-fr">Parcourir toute la bibliothèque ↓</a>
+        </div>
         <div class="rounded-md bg-yellow-400 p-4 mt-12 sm:mt-4 mr-4 max-w-2xl mx-auto text-sm sm:absolute top-0 right-0">
           <div class="flex">
             <div class="flex-shrink-0 mt-2">
@@ -175,6 +179,37 @@
       </a>
     </div>
   </div>
+  <!-- Library -->
+  <section id="library" class="px-4 pb-16 sm:pb-24">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10">
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-white i18n-en hidden">Browse the whole library</h3>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-white i18n-fr">Parcourez toute la bibliothèque</h3>
+        <p class="mt-2 text-yellow-200 i18n-en hidden">Search, filter by tags, and jump to any question.</p>
+        <p class="mt-2 text-yellow-200 i18n-fr">Recherchez, filtrez par tags, et piochez la question idéale.</p>
+      </div>
+      <div class="bg-yellow-400 rounded-2xl p-4 sm:p-6 shadow-lg">
+        <div class="sm:flex sm:items-center sm:justify-between gap-4">
+          <div class="flex-1">
+            <label for="library-search" class="sr-only i18n-en hidden">Search</label>
+            <label for="library-search" class="sr-only i18n-fr">Recherche</label>
+            <input id="library-search" type="search" autocomplete="off" class="w-full px-5 py-3 border border-yellow-300 shadow-sm placeholder-yellow-600 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 rounded-md bg-yellow-200 text-yellow-900" placeholder="">
+          </div>
+          <div class="mt-3 sm:mt-0 text-sm text-yellow-800 font-semibold" id="library-count"></div>
+        </div>
+        <div class="mt-4">
+          <div class="flex items-center justify-between">
+            <p class="text-xs uppercase tracking-wide text-yellow-800 i18n-en hidden">Filter by tags</p>
+            <p class="text-xs uppercase tracking-wide text-yellow-800 i18n-fr">Filtrer par tags</p>
+            <button id="library-clear" type="button" class="text-xs text-yellow-700 hover:text-yellow-900 underline hidden"></button>
+          </div>
+          <div id="tag-filters" class="mt-3 flex flex-wrap gap-2"></div>
+        </div>
+        <div id="library-empty" class="hidden mt-6 text-sm text-yellow-800"></div>
+        <ul id="library-list" class="mt-6 space-y-3"></ul>
+      </div>
+    </div>
+  </section>
   <script type="text/javascript">
     const icebreakers_en = [
       "What event in your year of birth do you feel close to?",
@@ -533,6 +568,288 @@
       showElement(document.getElementById('i18n-alt-en'))
       document.getElementById('i18n-alt-en-link').href = "/" + question_path
     }
+
+    const uiStrings = {
+      en: {
+        searchPlaceholder: "Search questions, tags, or keywords",
+        clear: "Clear filters",
+        count: (filtered, total) => `${filtered} of ${total} questions`,
+        empty: "No matches. Try clearing filters or broadening your search.",
+        allTags: "All tags",
+        open: "Open",
+        copy: "Copy link",
+        copied: "Copied!"
+      },
+      fr: {
+        searchPlaceholder: "Rechercher une question, un tag, un mot-clé",
+        clear: "Effacer les filtres",
+        count: (filtered, total) => `${filtered} sur ${total} questions`,
+        empty: "Aucun résultat. Essayez de retirer des filtres.",
+        allTags: "Tous les tags",
+        open: "Ouvrir",
+        copy: "Copier le lien",
+        copied: "Copié !"
+      }
+    };
+
+    const tagDefinitions = {
+      en: [
+        { id: "work", label: "Work & Teams", keywords: ["work", "manager", "team", "colleague", "meeting", "project", "office", "sprint", "job", "mission", "client", "desk"] },
+        { id: "personal", label: "Personal", keywords: ["child", "pet", "family", "ancestor", "childhood", "favorite", "phobia", "fear", "scar", "gift", "habit", "talent", "personality", "life", "dream"] },
+        { id: "food", label: "Food & Drink", keywords: ["food", "dish", "cook", "drink", "cafe", "coffee", "restaurant", "lunch", "breakfast", "snack", "pizza", "chocolate", "vegetable"] },
+        { id: "travel", label: "Travel", keywords: ["travel", "trip", "vacation", "holiday", "abroad", "country", "island", "mountain", "sea", "weekend"] },
+        { id: "entertainment", label: "Entertainment", keywords: ["movie", "film", "tv", "series", "show", "book", "music", "song", "video", "game", "jedi", "harry", "celebrity", "board game"] },
+        { id: "tech", label: "Tech & Games", keywords: ["app", "gadget", "smart home", "video game", "game console"] },
+        { id: "hypothetical", label: "Hypothetical", keywords: ["if you could", "would you", "imagine", "time machine", "time stops", "teleport", "zombie", "vampire", "clone", "alien", "president", "magic", "infinite", "you find", "you just learned"] },
+        { id: "emoji", label: "Emoji", keywords: ["emoji"] },
+        { id: "misc", label: "Wildcard", keywords: [] }
+      ],
+      fr: [
+        { id: "work", label: "Travail & Equipe", keywords: ["travail", "manager", "equipe", "collegue", "reunion", "projet", "bureau", "sprint", "metier", "mission", "teletravail", "poste", "client"] },
+        { id: "personal", label: "Personnel", keywords: ["enfant", "animal", "famille", "ancetre", "enfance", "prefere", "peur", "phobie", "cicatrice", "cadeau", "habitude", "talent", "personnalite", "vie", "reve"] },
+        { id: "food", label: "Nourriture & Boissons", keywords: ["plat", "cuisin", "boire", "manger", "cafe", "restaurant", "dejeuner", "petit dejeuner", "snack", "pizza", "chocolat", "legume"] },
+        { id: "travel", label: "Voyage", keywords: ["voyage", "vacances", "week end", "week-end", "etranger", "pays", "ile", "montagne", "mer"] },
+        { id: "entertainment", label: "Divertissement", keywords: ["film", "serie", "television", "emission", "livre", "musique", "chanson", "video", "jeu", "celebrite", "harry", "jedi", "jeux de societe"] },
+        { id: "tech", label: "Tech & Jeux", keywords: ["app", "application", "gadget", "video game", "jeu video"] },
+        { id: "hypothetical", label: "Hypothetique", keywords: ["si vous pouviez", "voudriez vous", "imaginez", "machine spatio", "machine temporelle", "temps s'arrete", "teleport", "zombie", "vampire", "clone", "extra terrestre", "president", "magique", "infini", "vous trouvez", "vous venez d'apprendre"] },
+        { id: "emoji", label: "Emoji", keywords: ["emoji"] },
+        { id: "misc", label: "Surprise", keywords: [] }
+      ]
+    };
+
+    function normalizeText(str) {
+      return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function detectEmoji(text) {
+      try {
+        return new RegExp("[\\p{Extended_Pictographic}]", "u").test(text);
+      } catch (e) {
+        return text.indexOf("emoji") !== -1;
+      }
+    }
+
+    function buildLibraryItems() {
+      const definitions = tagDefinitions[lang];
+      const normalized = definitions.map(def => ({
+        id: def.id,
+        label: def.label,
+        keywords: def.keywords.map(normalizeText)
+      }));
+      return icebreakers[lang].map((text, index) => {
+        const textNormalized = normalizeText(text);
+        const tags = [];
+        normalized.forEach(def => {
+          if (def.keywords.length > 0 && def.keywords.some(keyword => textNormalized.includes(keyword))) {
+            tags.push(def.id);
+          }
+        });
+        if (detectEmoji(text)) {
+          tags.push("emoji");
+        }
+        const uniqueTags = Array.from(new Set(tags));
+        if (uniqueTags.length === 0) {
+          uniqueTags.push("misc");
+        }
+        return { id: index, text: text, tags: uniqueTags };
+      });
+    }
+
+    const libraryItems = buildLibraryItems();
+    const tagMap = {};
+    tagDefinitions[lang].forEach(def => { tagMap[def.id] = def.label; });
+
+    const searchInput = document.getElementById('library-search');
+    const libraryList = document.getElementById('library-list');
+    const libraryCount = document.getElementById('library-count');
+    const libraryEmpty = document.getElementById('library-empty');
+    const tagFilters = document.getElementById('tag-filters');
+    const clearFiltersButton = document.getElementById('library-clear');
+
+    if (searchInput) {
+      searchInput.placeholder = uiStrings[lang].searchPlaceholder;
+    }
+    if (clearFiltersButton) {
+      clearFiltersButton.textContent = uiStrings[lang].clear;
+    }
+
+    const selectedTags = new Set();
+
+    const tagCounts = {};
+    libraryItems.forEach(item => {
+      item.tags.forEach(tagId => {
+        tagCounts[tagId] = (tagCounts[tagId] || 0) + 1;
+      });
+    });
+
+    function setTagButtonState(button, isActive) {
+      const activeClasses = ["bg-yellow-700", "text-yellow-100", "border-yellow-700"];
+      const inactiveClasses = ["bg-yellow-200", "text-yellow-900", "border-yellow-300"];
+      if (isActive) {
+        button.classList.remove(...inactiveClasses);
+        button.classList.add(...activeClasses);
+      } else {
+        button.classList.remove(...activeClasses);
+        button.classList.add(...inactiveClasses);
+      }
+    }
+
+    function buildTagFilters() {
+      if (!tagFilters) return;
+      tagFilters.innerHTML = '';
+
+      const allButton = document.createElement('button');
+      allButton.type = "button";
+      allButton.dataset.tag = "all";
+      allButton.className = "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide transition";
+      allButton.textContent = uiStrings[lang].allTags;
+      setTagButtonState(allButton, selectedTags.size === 0);
+      allButton.addEventListener('click', () => {
+        selectedTags.clear();
+        updateTagButtons();
+        renderLibrary();
+      });
+      tagFilters.appendChild(allButton);
+
+      tagDefinitions[lang].forEach(def => {
+        const count = tagCounts[def.id] || 0;
+        if (count === 0) return;
+        const button = document.createElement('button');
+        button.type = "button";
+        button.dataset.tag = def.id;
+        button.className = "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide transition";
+        button.textContent = `${def.label} (${count})`;
+        setTagButtonState(button, selectedTags.has(def.id));
+        button.addEventListener('click', () => {
+          if (selectedTags.has(def.id)) {
+            selectedTags.delete(def.id);
+          } else {
+            selectedTags.add(def.id);
+          }
+          updateTagButtons();
+          renderLibrary();
+        });
+        tagFilters.appendChild(button);
+      });
+    }
+
+    function updateTagButtons() {
+      Array.prototype.forEach.call(tagFilters.children, (button) => {
+        const tagId = button.dataset.tag;
+        if (tagId === "all") {
+          setTagButtonState(button, selectedTags.size === 0);
+          return;
+        }
+        setTagButtonState(button, selectedTags.has(tagId));
+      });
+      updateClearButton();
+    }
+
+    function updateClearButton() {
+      if (!clearFiltersButton) return;
+      const hasFilters = selectedTags.size > 0 || (searchInput && searchInput.value.trim().length > 0);
+      if (hasFilters) {
+        clearFiltersButton.classList.remove('hidden');
+      } else {
+        clearFiltersButton.classList.add('hidden');
+      }
+    }
+
+    function matchesSearch(item, queryTokens) {
+      if (queryTokens.length === 0) return true;
+      const textNormalized = normalizeText(item.text);
+      const tagText = item.tags.map(tagId => normalizeText(tagMap[tagId] || tagId)).join(' ');
+      return queryTokens.every(token => textNormalized.includes(token) || tagText.includes(token));
+    }
+
+    function matchesTags(item) {
+      if (selectedTags.size === 0) return true;
+      return Array.from(selectedTags).some(tagId => item.tags.includes(tagId));
+    }
+
+    function renderLibrary() {
+      if (!libraryList) return;
+      const query = searchInput ? searchInput.value.trim() : '';
+      const queryTokens = normalizeText(query).split(/\s+/).filter(Boolean);
+      const filtered = libraryItems.filter(item => matchesSearch(item, queryTokens) && matchesTags(item));
+
+      libraryCount.textContent = uiStrings[lang].count(filtered.length, libraryItems.length);
+      libraryEmpty.textContent = uiStrings[lang].empty;
+      libraryEmpty.classList.toggle('hidden', filtered.length !== 0);
+
+      libraryList.innerHTML = '';
+      const basePath = window.location.href.split('?')[0];
+      filtered.forEach(item => {
+        const itemContainer = document.createElement('li');
+        itemContainer.className = "bg-yellow-200 border border-yellow-300 rounded-xl p-4";
+
+        const question = document.createElement('p');
+        question.className = "text-yellow-900 font-semibold text-lg";
+        question.innerHTML = item.text;
+        itemContainer.appendChild(question);
+
+        const tagRow = document.createElement('div');
+        tagRow.className = "mt-3 flex flex-wrap gap-2";
+        item.tags.forEach(tagId => {
+          const tag = document.createElement('span');
+          tag.className = "px-2 py-1 text-xs uppercase tracking-wide rounded-full bg-yellow-400 text-yellow-900 font-semibold";
+          tag.textContent = tagMap[tagId] || tagId;
+          tagRow.appendChild(tag);
+        });
+        itemContainer.appendChild(tagRow);
+
+        const actions = document.createElement('div');
+        actions.className = "mt-3 flex items-center gap-3 text-sm";
+
+        const openLink = document.createElement('a');
+        openLink.href = `?q=${item.id}`;
+        openLink.className = "text-yellow-700 font-semibold hover:text-yellow-900";
+        openLink.textContent = uiStrings[lang].open;
+        actions.appendChild(openLink);
+
+        const copyButton = document.createElement('button');
+        copyButton.type = "button";
+        copyButton.className = "copy-question-link text-yellow-700 font-semibold hover:text-yellow-900";
+        copyButton.dataset.clipboardText = `${basePath}?q=${item.id}`;
+        copyButton.dataset.defaultLabel = uiStrings[lang].copy;
+        copyButton.dataset.copiedLabel = uiStrings[lang].copied;
+        copyButton.textContent = uiStrings[lang].copy;
+        actions.appendChild(copyButton);
+
+        itemContainer.appendChild(actions);
+        libraryList.appendChild(itemContainer);
+      });
+      updateClearButton();
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        renderLibrary();
+      });
+    }
+
+    if (clearFiltersButton) {
+      clearFiltersButton.addEventListener('click', () => {
+        selectedTags.clear();
+        if (searchInput) searchInput.value = '';
+        updateTagButtons();
+        renderLibrary();
+      });
+    }
+
+    buildTagFilters();
+    renderLibrary();
+
+    var listClipboard = new ClipboardJS('.copy-question-link');
+    listClipboard.on('success', function(e) {
+      const trigger = e.trigger;
+      const copiedLabel = trigger.dataset.copiedLabel || uiStrings[lang].copied;
+      const defaultLabel = trigger.dataset.defaultLabel || uiStrings[lang].copy;
+      trigger.textContent = copiedLabel;
+      setTimeout(function() {
+        trigger.textContent = defaultLabel;
+      }, 1500);
+    });
   </script>
   <script src="https://kit.fontawesome.com/220febb073.js" crossorigin="anonymous"></script>
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
